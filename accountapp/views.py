@@ -5,5 +5,7 @@ from django.shortcuts import render
 
 
 def helloWorld(request):
-    return HttpResponse("Hello, World!") # Alt + Enter로 라이브러리 import 가능
+    return render(request, template_name="base.html")
+
+    # return HttpResponse("Hello, World!") # Alt + Enter로 라이브러리 import 가능
 
