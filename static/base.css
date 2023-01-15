@@ -1,0 +1,32 @@
+.page_title {
+    font-family: 'Raleway', sans-serif;
+}
+
+.header_container {
+    text-align:center;
+    margin:2rem 0;
+}
+
+.footer_container {
+    text-align:center;
+    margin-top:2rem;
+}
+
+.footer_menu {
+    font-size:.6rem
+}
+
+.footer_title {
+    margin-top:15px
+}
+
+.accountapp_content {
+    height:20rem;
+    background-color:lightgray;
+    border-radius:1rem;
+    margin:2rem;
+}
+
+.nanum_myeongjo {
+    font-family: 'Nanum Myeongjo', serif;
+}

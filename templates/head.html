@@ -1,3 +1,6 @@
+<!-- static 모듈 import -->
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <title>Project1</title>
@@ -11,4 +14,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Raleway:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Default CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+    <!-- base.css라는 정적 파일의 주소를 장고가 동적으로 가져옴 -->
 </head>
