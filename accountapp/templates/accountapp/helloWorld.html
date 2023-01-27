@@ -4,6 +4,15 @@
 
     <div class="nanum_myeongjo accountapp_content">
         <h1> main content! </h1>
+
+        <form action="/account/helloWorld/" method="post"> <!-- action: 요청을 보낼 url -->
+        <!-- 장고에서 post method로 요청을 보낼 때: 반드시 CSRF 토큰을 form에 명시해야 함 -->
+            {% csrf_token %} <!-- CSRF 토큰: 장고에서 제공하는 보안 기능 중 하나 -->
+            <input class="btn btn-primary" type="submit" value="POST">
+        </form>
+
+        <h1> {{ text }} </h1>
+
     </div>
 
 {% endblock %}
