@@ -1,7 +1,9 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 
 # Create your views here.
+
 from accountapp.models import User
 
 
@@ -14,11 +16,15 @@ def helloWorld(request):
         user.password = request.POST.get("password")
         user.save() # 만든 객체 저장 -> 실제 DB에 저장됨
 
-        return render(request, template_name="accountapp/helloWorld.html",
-                      context={"userInfo": user})
+        # users = User.objects.all()
+
+        # return render(request, template_name="accountapp/helloWorld.html",
+        #               context={"userInfo": user, "usersInfo": users})
+        return HttpResponseRedirect(reverse("accountapp:helloWorld"))
     else:
+        users = User.objects.all()
         return render(request, template_name="accountapp/helloWorld.html",
-                      context={"text": "NOT POST METHOD"})
+                      context={"usersInfo": users})
 
     # return render(request, template_name="accountapp/helloWorld.html")
     # return HttpResponse("Hello, World!") # Alt + Enter로 라이브러리 import 가능

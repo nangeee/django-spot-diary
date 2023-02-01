@@ -21,8 +21,8 @@
 }
 
 .accountapp_content {
-    height:20rem;
-    border-radius:1rem;
+    /* height:20rem; */
+    height: auto;
     margin:2rem;
     text-align:center;
 }

@@ -17,7 +17,7 @@
                 <input class="w-25" id="userIDInput" type="text" name="userID">
             </div>
             <div class="mb-3">
-                <label class="userInfoLabel"for="passwordInput">Password</label>
+                <label class="userInfoLabel" for="passwordInput">Password</label>
                 <input class="w-25" id="passwordInput" type="password" name="password">
             </div>
             <div>
@@ -26,8 +26,16 @@
         </form>
 
         {% if userInfo %}
-        <h1> {{ userInfo.userName }} </h1>
-        <h1> {{ userInfo.userID }} </h1>
+        <h2>latest input</h2>
+        <h3> userName: {{ userInfo.userName }} </h3>
+        <h3> userID: {{ userInfo.userID }} </h3>
+        {% endif %}
+
+        {% if usersInfo %}
+        <h2>data from database</h2>
+        {% for user in usersInfo %}
+        <h3>userName: {{ user.userName }}, userID: {{ user.userID }}</h3>
+        {% endfor %}
         {% endif %}
 
     </div>
