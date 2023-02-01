@@ -22,11 +22,19 @@
 
 .accountapp_content {
     height:20rem;
-    background-color:lightgray;
     border-radius:1rem;
     margin:2rem;
+    text-align:center;
 }
 
 .nanum_myeongjo {
     font-family: 'Nanum Myeongjo', serif;
+}
+
+.userInfoSubmit {
+    margin-top:10px;
+}
+
+.userInfoLabel {
+    width:7%;
 }

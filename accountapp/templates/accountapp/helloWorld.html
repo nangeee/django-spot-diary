@@ -8,10 +8,27 @@
         <form action="/account/helloWorld/" method="post"> <!-- action: 요청을 보낼 url -->
         <!-- 장고에서 post method로 요청을 보낼 때: 반드시 CSRF 토큰을 form에 명시해야 함 -->
             {% csrf_token %} <!-- CSRF 토큰: 장고에서 제공하는 보안 기능 중 하나 -->
-            <input class="btn btn-primary" type="submit" value="POST">
+            <div class="mb-3">
+                <label class="userInfoLabel" for="userNameInput">Name</label>
+                <input class="w-25" id="userNameInput" type="text" name="userName">
+            </div>
+            <div class="mb-3">
+                <label class="userInfoLabel" for="userIDInput">ID</label>
+                <input class="w-25" id="userIDInput" type="text" name="userID">
+            </div>
+            <div class="mb-3">
+                <label class="userInfoLabel"for="passwordInput">Password</label>
+                <input class="w-25" id="passwordInput" type="password" name="password">
+            </div>
+            <div>
+                <input class="btn btn-primary userInfoSubmit" type="submit" value="Submit">
+            </div>
         </form>
 
-        <h1> {{ text }} </h1>
+        {% if userInfo %}
+        <h1> {{ userInfo.userName }} </h1>
+        <h1> {{ userInfo.userID }} </h1>
+        {% endif %}
 
     </div>
 
