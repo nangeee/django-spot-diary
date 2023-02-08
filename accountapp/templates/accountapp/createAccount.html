@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="nanum_myeongjo accountapp_content">
+        <form action="{% url 'accountapp:createAccount' %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input class="btn btn-primary" type="submit" >
+        </form>
+    </div>
+
+{% endblock %}
+
