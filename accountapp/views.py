@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 
 # Create your views here.
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from accountapp.models import User as myUser
 
 
@@ -48,4 +48,11 @@ class AccountCreateView(CreateView):  # django.views.generic.CreateView
 
     # account creation 과정에서 볼 html view 지정
     template_name = "accountapp/createAccount.html"
+
+
+class AccountDetailView(DetailView):  # django.views.generic.DetailView
+    model = User
+    context_object_name = "current_user"
+    template_name = "accountapp/detail.html"
+
 

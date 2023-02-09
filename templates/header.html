@@ -10,6 +10,7 @@
         {% if not user.is_authenticated %} <!-- user가 로그인이 안 되어 있다면 -->
         <a href="{% url 'accountapp:login' %}?next={{ request.path }}"><span>Login</span></a>
         {% else %} <!-- user가 로그인이 되어 있다면 -->
+        <a href="{% url 'accountapp:detail' pk=user.pk %}"><span>My Page</span></a>
         <a href="{% url 'accountapp:logout' %}?next={{ request.path }}"><span>Logout</span></a>
         {% endif %}
     </div>
