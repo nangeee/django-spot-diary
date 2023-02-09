@@ -1,4 +1,4 @@
-.page_title {
+.raleway {
     font-family: 'Raleway', sans-serif;
 }
 
@@ -12,12 +12,16 @@
     margin-top:2rem;
 }
 
+.header_menu {
+    font-size:1.2rem;
+}
+
 .footer_menu {
-    font-size:.6rem
+    font-size:.8rem
 }
 
 .footer_title {
-    margin-top:15px
+    margin-top:15px;
 }
 
 .accountapp_content {
@@ -37,4 +41,9 @@
 
 .userInfoLabel {
     width:7%;
+}
+
+.loginForm, .createAccountForm {
+    margin: 30px auto;
+    max-width:40%;
 }

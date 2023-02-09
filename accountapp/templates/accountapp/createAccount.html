@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 
+{% load bootstrap5 %}
+
 {% block content %}
 
-    <div class="nanum_myeongjo accountapp_content">
+    <div class="nanum_myeongjo accountapp_content createAccountForm">
+        <div class="mb-3">
+            <h3>Sign Up</h3>
+        </div>
         <form action="{% url 'accountapp:createAccount' %}" method="post">
             {% csrf_token %}
-            {{ form }}
-            <input class="btn btn-primary" type="submit" >
+<!--            {{ form }}-->
+            {% bootstrap_form form %}
+            <input class="btn btn-outline-dark rounded-pill col-4 mt-3" type="submit" >
         </form>
     </div>
 
