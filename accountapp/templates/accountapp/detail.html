@@ -9,6 +9,19 @@
         <h2>
             {{ current_user.username }}
         </h2>
+
+        {% if current_user == user %}
+        <a href="{% url 'accountapp:update' pk=current_user.pk %}">
+            <p>
+                Modify Account Info
+            </p>
+        </a>
+        <a href="{% url 'accountapp:delete' pk=current_user.pk %}">
+            <p>
+                Delete Account
+            </p>
+        </a>
+        {% endif %}
     </div>
 
 {% endblock %}
