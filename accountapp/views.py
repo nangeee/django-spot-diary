@@ -61,6 +61,7 @@ class AccountDetailView(DetailView):  # django.views.generic.DetailView
 # Account 정보 수정 -> AccountUpdateView
 class AccountUpdateView(UpdateView):
     model = User
+    context_object_name = "current_user"
     form_class = AccountUpdateForm
     success_url = reverse_lazy("accountapp:helloWorld")
     template_name = "accountapp/update.html"
@@ -69,7 +70,8 @@ class AccountUpdateView(UpdateView):
 # Account 삭제 -> AccountDeleteView
 class AccountDeleteView(DeleteView):
     model = User
+    context_object_name = "current_user"
     success_url = reverse_lazy("accountapp:helloWorld")
     template_name = "accountapp/delete.html"
 
-    
+

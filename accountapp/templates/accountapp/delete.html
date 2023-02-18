@@ -8,7 +8,7 @@
         <div class="mb-3">
             <h3>Delete Account</h3>
         </div>
-        <form action="{% url 'accountapp:delete' pk=user.pk %}" method="post">
+        <form action="{% url 'accountapp:delete' pk=current_user.pk %}" method="post">
             {% csrf_token %}
             <input class="btn btn-outline-dark rounded-pill col-4 mt-3" type="submit" value="Delete">
         </form>
