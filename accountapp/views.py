@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 
@@ -13,26 +13,30 @@ from accountapp.models import User as myUser
 
 # Function Based View
 def helloWorld(request):
-    if request.method == "POST":
-
-        user = myUser() # models.py의 User 클래스 객체 생성
-        user.userName = request.POST.get("userName") # post 방식으로 받은 데이터 중에서, userName 이라는 이름의 데이터 가져오기
-        user.userID = request.POST.get("userID")
-        user.password = request.POST.get("password")
-        user.save() # 만든 객체 저장 -> 실제 DB에 저장됨
-
-        # users = User.objects.all()
-
-        # return render(request, template_name="accountapp/helloWorld.html",
-        #               context={"userInfo": user, "usersInfo": users})
-        return HttpResponseRedirect(reverse("accountapp:helloWorld"))
-    else:
-        users = myUser.objects.all()
-        return render(request, template_name="accountapp/helloWorld.html",
-                      context={"usersInfo": users})
-
-    # return render(request, template_name="accountapp/helloWorld.html")
-    # return HttpResponse("Hello, World!") # Alt + Enter로 라이브러리 import 가능
+    
+    if request.user.is_authenticated: # 만약 로그인이 되어 있다면
+        if request.method == "POST":
+    
+            user = myUser() # models.py의 User 클래스 객체 생성
+            user.userName = request.POST.get("userName") # post 방식으로 받은 데이터 중에서, userName 이라는 이름의 데이터 가져오기
+            user.userID = request.POST.get("userID")
+            user.password = request.POST.get("password")
+            user.save() # 만든 객체 저장 -> 실제 DB에 저장됨
+    
+            # users = User.objects.all()
+    
+            # return render(request, template_name="accountapp/helloWorld.html",
+            #               context={"userInfo": user, "usersInfo": users})
+            return HttpResponseRedirect(reverse("accountapp:helloWorld"))
+        else:
+            users = myUser.objects.all()
+            return render(request, template_name="accountapp/helloWorld.html",
+                          context={"usersInfo": users})
+    
+        # return render(request, template_name="accountapp/helloWorld.html")
+        # return HttpResponse("Hello, World!") # Alt + Enter로 라이브러리 import 가능
+    else: # 만약 로그인이 안 되어 있다면
+        return HttpResponseRedirect(reverse("accountapp:login"))
 
 
 
@@ -57,6 +61,18 @@ class AccountDetailView(DetailView):  # django.views.generic.DetailView
     context_object_name = "current_user"
     template_name = "accountapp/detail.html"
 
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().get(*args, **kwargs)
+        else:
+            return HttpResponseForbidden()  # django.http.HttpResponseForbidden
+
+    def post(self, *args, **kwargs):
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().post(*args, **kwargs)
+        else:
+            return HttpResponseForbidden()
+
 
 # Account 정보 수정 -> AccountUpdateView
 class AccountUpdateView(UpdateView):
@@ -66,6 +82,18 @@ class AccountUpdateView(UpdateView):
     success_url = reverse_lazy("accountapp:helloWorld")
     template_name = "accountapp/update.html"
 
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().get(*args, **kwargs)
+        else:
+            return HttpResponseForbidden()
+
+    def post(self, *args, **kwargs):
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().post(*args, **kwargs)
+        else:
+            return HttpResponseForbidden()
+
 
 # Account 삭제 -> AccountDeleteView
 class AccountDeleteView(DeleteView):
@@ -74,4 +102,15 @@ class AccountDeleteView(DeleteView):
     success_url = reverse_lazy("accountapp:helloWorld")
     template_name = "accountapp/delete.html"
 
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().get(*args, **kwargs)
+        else:
+            return HttpResponseForbidden()
+
+    def post(self, *args, **kwargs):
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().post(*args, **kwargs)
+        else:
+            return HttpResponseForbidden()
 
