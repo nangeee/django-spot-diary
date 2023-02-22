@@ -6,6 +6,7 @@ from django.db import models
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    # related_name="profile" -> user.profile.image와 같이 접근 가능
 
     image = models.ImageField(upload_to="profile/", null=True)
 

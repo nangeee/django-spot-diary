@@ -24,7 +24,7 @@
     margin-top:15px;
 }
 
-.accountapp_content {
+.accountapp_content, .profileapp_content {
     /* height:20rem; */
     height: auto;
     margin:2rem;
@@ -43,7 +43,7 @@
     width:7%;
 }
 
-.loginForm, .createAccountForm, .accountDetail {
+.loginForm, .createAccountForm, .accountDetail, .createProfileForm {
     margin: 30px auto;
     max-width:40%;
     text-align:center;

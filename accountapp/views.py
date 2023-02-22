@@ -10,7 +10,8 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
 from accountapp.decorators import account_ownership_required
-from accountapp.forms import AccountUpdateForm
+from accountapp.forms import AccountUpdateForm, UserCreationForm2
+# from accountapp.forms import AccountUpdateForm
 from accountapp.models import User as myUser
 
 
@@ -53,7 +54,8 @@ class AccountCreateView(CreateView):  # django.views.generic.CreateView
     model = User  # django.contrib.auth.models.User -> ctrl + B 로 소스코드 확인
 
     # user model을 만들 때 사용할 form 필요
-    form_class = UserCreationForm  # django.contrib.auth.forms.UserCreationForm
+    # form_class = UserCreationForm  # django.contrib.auth.forms.UserCreationForm
+    form_class = UserCreationForm2  # accountapp.forms.UserCreationForm2
 
     # account creation 성공했을 때 -> 어느 경로로 재연결할지 지정
     success_url = reverse_lazy("accountapp:helloWorld")  # Function Based View에서는 reverse 함수 사용
