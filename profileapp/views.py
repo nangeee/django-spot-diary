@@ -2,12 +2,16 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, UpdateView
 
+from profileapp.decorators import profile_ownership_required
 from profileapp.forms import ProfileCreationForm
 from profileapp.models import Profile
 
 
+@method_decorator(profile_ownership_required, "get")
+@method_decorator(profile_ownership_required, "post")
 class ProfileCreateView(CreateView):
     model = Profile
     context_object_name = "current_profile"
@@ -22,6 +26,8 @@ class ProfileCreateView(CreateView):
         return super().form_valid(form)  # 이 line만 작성하면, 원래의 form_valid 함수와 동일
 
 
+@method_decorator(profile_ownership_required, "get")
+@method_decorator(profile_ownership_required, "post")
 class ProfileUpdateView(UpdateView):
     model = Profile
     context_object_name = "current_profile"
