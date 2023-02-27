@@ -72,3 +72,7 @@ a:hover {
     border-radius: 5rem;
     margin-left: 180px;
 }
+
+.header_menu > * {
+    padding: 0 5px;
+}
