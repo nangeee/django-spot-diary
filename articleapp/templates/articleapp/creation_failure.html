@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <h3>게시글 작성에 실패하였습니다.</h3>
+    {% if error_msg %}
+    {% for msg in error_msg %}
+    {% if msg %}
+
+    <h3> {{ msg }} </h3>
+
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+    <div>
+        <a href="{% url 'articleapp:createArticle' %}">다시 작성하기</a>
+    </div>
+
+{% endblock %}

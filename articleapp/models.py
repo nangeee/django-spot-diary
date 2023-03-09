@@ -22,12 +22,13 @@ class Article(models.Model):
 
 
 def get_image_filename(instance, filename):
-    title = instance.post.title
-    slug = slugify(title)
+    # file will be uploaded to MEDIA_ROOT/article/<title>-<filename>
+    title = instance.article.title
+    slug = slugify(title, allow_unicode=True)  # django.template.defaultfilters.slugify
     return "article/%s-%s" % (slug, filename)
 
 
-class ArticleImages(models.Model):
+class ArticleImage(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="image")
 
     image = models.ImageField(upload_to=get_image_filename, null=True, default=None)
