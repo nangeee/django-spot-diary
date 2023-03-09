@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.password_validation import password_validators_help_texts
 from django.utils.functional import lazy
 from django.utils.html import format_html_join, format_html
@@ -24,6 +24,7 @@ class UserCreationForm2(UserCreationForm):
         super().__init__(*args, **kwargs)
 
         self.fields["password1"].help_text = password_validators_help_text_html()
+        self.fields["username"].label = "User Name"
 
 
 class AccountUpdateForm(UserCreationForm2):
@@ -31,6 +32,13 @@ class AccountUpdateForm(UserCreationForm2):
         super().__init__(*args, **kwargs)
         self.fields["username"].disabled = True  # ID 변경 불가능하도록 disabled 시켜줌
         self.fields["username"].help_text = None
+
+
+class LoginForm2(AuthenticationForm):
+    def __init__(self, request=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["username"].label = "User Name"
+
 
 
 

@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
@@ -10,7 +11,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
 from accountapp.decorators import account_ownership_required
-from accountapp.forms import AccountUpdateForm, UserCreationForm2
+from accountapp.forms import AccountUpdateForm, UserCreationForm2, LoginForm2
 # from accountapp.forms import AccountUpdateForm
 from accountapp.models import User as myUser
 
@@ -94,5 +95,9 @@ class AccountDeleteView(DeleteView):
     success_url = reverse_lazy("accountapp:helloWorld")
     template_name = "accountapp/delete.html"
 
+
+class CustomizedLoginView(LoginView):
+    form_class = LoginForm2
+    template_name = "accountapp/login.html"
 
 
