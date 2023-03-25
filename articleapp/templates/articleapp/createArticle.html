@@ -1,29 +1,36 @@
 {% extends 'base.html' %}
 
+{% load bootstrap5 %}
+
 {% block content %}
 
     <div class="nanum_myeongjo accountapp_content createAccountForm">
         <div class="mb-5">
             <h3>게시글 작성</h3>
         </div>
-        <form class="createForm" action="{% url 'accountapp:createArticle' %}" method="post" enctype="multipart/form-data">
+        <form class="createForm" action="{% url 'articleapp:create' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 <!--            {{ articleForm.as_p }}-->
-            <h4> {{ articleForm.title.label }} </h4>
-            {{ articleForm.title }}
-            <h4> {{ articleForm.place_name.label }} </h4>
-            {{ articleForm.place_name }}
-            <h4> {{ articleForm.address.label }} </h4>
-            {{ articleForm.address }}
-            <h4> {{ articleForm.content.label }} </h4>
-            {{ articleForm.content }}
+
+<!--            부트스트랩 form 적용 가능하다!!!-->
+            {% bootstrap_form articleForm form_group_class='mb-5' size='small'  %}
+
+<!--            <h6> {{ articleForm.title.label }} </h6>-->
+<!--            <p class="articleform_field"> {{ articleForm.title }} </p>-->
+<!--            <h6> {{ articleForm.place_name.label }} </h6>-->
+<!--            <p class="articleform_field"> {{ articleForm.place_name }} </p>-->
+<!--            <h6> {{ articleForm.address.label }} </h6>-->
+<!--            <p class="articleform_field"> {{ articleForm.address }} </p>-->
+<!--            <h6> {{ articleForm.content.label }} </h6>-->
+<!--            <p class="articleform_field"> {{ articleForm.content }} </p>-->
 
             {{ formset.management_form }}
             {% for form in formset %}
-                {{ form }}
+<!--                {{ form.as_p }}-->
+                {% bootstrap_form form form_group_class='mb-2' size='small'  %}
             {% endfor %}
 
-            <input class="btn btn-outline-dark rounded-pill col-4 mt-2" type="submit" >
+            <input class="btn btn-outline-dark rounded-pill col-4 mt-4" type="submit" >
         </form>
     </div>
 

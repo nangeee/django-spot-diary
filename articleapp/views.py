@@ -6,14 +6,14 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse
 from django.utils.decorators import method_decorator
+from django.views.generic import DetailView
+from django.utils.text import slugify
 
-from articleapp.decorators import account_ownership_required
 from articleapp.forms import *
 from articleapp.models import *
 
 
 @login_required
-@account_ownership_required
 def create_article(request):
     # 하나의 modelform 을 여러번 쓸 수 있음. 모델, 모델폼, 몇 개의 폼을 띄울건지 갯수
     ImageFormSet = modelformset_factory(ArticleImage, form=ArticleImageForm, extra=5)
@@ -45,7 +45,8 @@ def create_article(request):
                     complete_image = ArticleImage(article=complete_ArticleForm, image=image_file)
                     complete_image.save()
 
-            return HttpResponseRedirect(reverse("articleapp:list"))  # 수정하자!! 작성된 게시글 페이지로 이동하도록
+            return HttpResponseRedirect(reverse("articleapp:detail", kwargs={"pk": complete_ArticleForm.pk}))
+            # return HttpResponseRedirect(reverse("articleapp:list"))  # 수정하자!! 작성된 게시글 페이지로 이동하도록
             # return HttpResponseRedirect(reverse("articleapp:list", kwargs={"pk": request.POST.}))
 
 
@@ -54,14 +55,18 @@ def create_article(request):
             return render(request, template_name="articleapp/creation_failure.html",
                           context={"error_msg": error_msg})
 
-
     else:
-        ArticleForm = ArticleCreationForm()
+        articleForm = ArticleCreationForm()
         formset = ImageFormSet(queryset=ArticleImage.objects.none())
 
         return render(request, template_name="articleapp/createArticle.html",
-                      context={"articleForm": ArticleForm, "formset": formset})
+                      context={"articleForm": articleForm, "formset": formset})
 
+
+class ArticleDetailView(DetailView):
+    model = Article
+    context_object_name = "current_article"
+    template_name = "articleapp/detail.html"
 
 
 

@@ -10,8 +10,6 @@ from profileapp.forms import ProfileCreationForm
 from profileapp.models import Profile
 
 
-@method_decorator(profile_ownership_required, "get")
-@method_decorator(profile_ownership_required, "post")
 class ProfileCreateView(CreateView):
     model = Profile
     context_object_name = "current_profile"

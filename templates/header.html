@@ -1,16 +1,17 @@
 <div class="header_container">
     <div>
-        <h1 class="raleway">Spot Diary</h1>
+        <a id="page_title" href="{% url 'accountapp:helloWorld' %}"><h1 class="raleway">Spot Diary</h1></a>
     </div>
 
     <div class="nanum_myeongjo header_menu">
-        <span>nav1</span>
         <span>nav2</span>
         <span>nav3</span>
         {% if not user.is_authenticated %} <!-- user가 로그인이 안 되어 있다면 -->
         <a href="{% url 'accountapp:login' %}?next={{ request.path }}"><span>Login</span></a>
         <a href="{% url 'accountapp:createAccount' %}"><span>Sign Up</span></a>
         {% else %} <!-- user가 로그인이 되어 있다면 -->
+        <a href="{% url 'articleapp:list' %}"><span>Articles</span></a>
+        <a href="{% url 'articleapp:create' %}"><span>Create Article</span></a>
         <a href="{% url 'accountapp:detail' pk=user.pk %}"><span>My Page</span></a>
         <a href="{% url 'accountapp:logout' %}"><span>Logout</span></a>
         {% endif %}
