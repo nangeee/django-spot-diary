@@ -107,7 +107,13 @@ a:hover {
 }
 
 .article_container {
-    width: 80%;
+    width: 60%;
     border: red solid 3px;
-    display: flex;
+    display: grid;
+    margin: auto;
+    background-color: gray;
+}
+
+.article_img {
+    width: 30%;
 }
