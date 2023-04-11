@@ -6,105 +6,38 @@
 
 {% block content %}
 
-<div class="article_container">
-    <h4> {{ current_article.title }} </h4>
-
-    {% for cur in current_article.image.all %}
-    <img src="{{ cur.image.url }}" class="article_img">
-    {% endfor %}
-
-    <!--    <div id="carouselExample" class="carousel slide">-->
-    <!--        <div class="carousel-inner">-->
-    <!--            <div class="carousel-item active">-->
-    <!--                <img src="{% static 'emoji1.png' %}" class="d-block w-30" alt="...">-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">-->
-    <!--            <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
-    <!--            <span class="visually-hidden" >Previous</span>-->
-    <!--        </button>-->
-    <!--        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">-->
-    <!--            <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
-    <!--            <span class="visually-hidden" style="color:black">Next</span>-->
-    <!--        </button>-->
-    <!--    </div>-->
-
-    <!--        <div >-->
-    <!--            {% if current_article.image %}-->
-    <!--            {% for cur in current_article.image.all %}-->
-    <!--            <div >-->
-    <!--                <img class="d-block w-20" src="{{ cur.image.url }}" >-->
-    <!--            </div>-->
-    <!--            {% endfor %}-->
-    <!--            {% endif %}-->
-
-    <!--            test-->
-    {% if current_article.image %}
-    <div id="carouselExampleIndicators" class="carousel slide">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-        </div>
-
+{% if current_article.image.all|length >= 1 %}
+<div id="carouselContainer">
+    <div id="articleImgCarousel" class="carousel slide" data-bs-ride="carousel">
+        {% for cur in current_article.image.all %}
         <div class="carousel-inner">
-            {% for cur in current_article.image.all %}
             <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
-                <img src="{{ cur.image.url }}" class="d-block article_img" alt="...">
+                <img src="{{ cur.image.url }}" class="article_img" alt="...">
             </div>
-            {% endfor %}
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        <button class="carousel-control-prev" type="button" data-bs-target="#articleImgCarousel"
                 data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        <button class="carousel-control-next" type="button" data-bs-target="#articleImgCarousel"
                 data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span>Next</span>
+            <span class="visually-hidden">Next</span>
         </button>
+        {% endfor %}
     </div>
-    {% endif %}
+</div>
+{% endif %}
+
+<div class="article_container">
+    <h4> {{ current_article.title }} </h4>
+
+
+    {% for cur in current_article.image.all %}
+    <h2> {{ cur.image.url }} </h2>
+    {% endfor %}
 
 </div>
-
-<div id="carouselExampleAutoplaying" class="carousel slide" style="background-color:black">
-    <!--    <div class="carousel-indicators">-->
-    <!--        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active"-->
-    <!--                aria-current="true" aria-label="Slide 1"></button>-->
-    <!--        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1"-->
-    <!--                aria-label="Slide 2"></button>-->
-    <!--    </div>-->
-
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="{% static 'emoji1.png' %}" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="{% static '7-baek.jpg' %}" class="d-block w-100" alt="...">
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-            data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-            data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
-
-<script>
-const myCarouselElement = document.querySelector('#carouselExampleAutoplaying');
-
-const carousel = new bootstrap.Carousel(myCarouselElement, {
-  interval: 2000,
-  touch: false
-})
-</script>
 
 {% endblock %}

@@ -115,5 +115,13 @@ a:hover {
 }
 
 .article_img {
-    width: 30%;
+    width: 50%;
+    height: 40vh;
+}
+
+#articleImgCarousel {
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    margin: auto;
 }
