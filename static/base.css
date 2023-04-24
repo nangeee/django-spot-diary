@@ -106,22 +106,31 @@ a:hover {
     margin-bottom:
 }
 
-.article_container {
-    width: 60%;
-    border: red solid 3px;
-    display: grid;
-    margin: auto;
-    background-color: gray;
+.carousel-item {
+    height: 70vh;
+    line-height: 70vh;
+    text-align: center;
 }
 
 .article_img {
-    width: 50%;
-    height: 40vh;
+    width: 60%;
+    height: auto;
+    verticle-align: middle;
 }
 
 #articleImgCarousel {
-    width: 50%;
-    height: 50%;
+    width: 60%;
     text-align: center;
     margin: auto;
+    margin-bottom: 10px;
+}
+
+.article_container {
+    width: 60%;
+    height: 40vh;
+    border: red solid 3px;
+    /* display: grid; */
+    margin: auto;
+    background-color: gray;
+    text-align: center;
 }

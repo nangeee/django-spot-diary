@@ -8,7 +8,7 @@
 
 {% if current_article.image.all|length >= 1 %}
 <div id="carouselContainer">
-    <div id="articleImgCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div id="articleImgCarousel" class="carousel carousel-dark slide">
         {% for cur in current_article.image.all %}
         <div class="carousel-inner">
             <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
@@ -31,12 +31,9 @@
 {% endif %}
 
 <div class="article_container">
-    <h4> {{ current_article.title }} </h4>
+    <h2> {{ current_article.title }} </h2>
 
 
-    {% for cur in current_article.image.all %}
-    <h2> {{ cur.image.url }} </h2>
-    {% endfor %}
 
 </div>
 
