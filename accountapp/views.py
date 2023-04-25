@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
@@ -48,9 +49,8 @@ def helloWorld(request):
     # return HttpResponse("Hello, World!") # Alt + Enter로 라이브러리 import 가능
 
 
-
 # Class Based View로 Account Creation View 생성
-class AccountCreateView(CreateView):  # django.views.generic.CreateView
+class AccountCreateView(LoginRequiredMixin, CreateView):  # django.views.generic.CreateView
     # 무슨 모델을 사용? -> 장고 기본 제공 User
     model = User  # django.contrib.auth.models.User -> ctrl + B 로 소스코드 확인
 
@@ -66,8 +66,9 @@ class AccountCreateView(CreateView):  # django.views.generic.CreateView
     template_name = "accountapp/createAccount.html"
 
 
-
-class AccountDetailView(DetailView):  # django.views.generic.DetailView
+# Class Based View에서 login required 데코레이터 사용하려면
+# 첫 번째 인자로 LoginRequiredMixin 전달
+class AccountDetailView(LoginRequiredMixin, DetailView):  # django.views.generic.DetailView
     model = User
     context_object_name = "current_user"
     template_name = "accountapp/detail.html"

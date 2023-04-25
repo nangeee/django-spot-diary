@@ -33,6 +33,9 @@
 <div class="article_container">
     <h2> {{ current_article.title }} </h2>
 
+    {% for cur in current_article.image.all %}
+    <h2> {{ cur.image.url }} </h2>
+    {% endfor %}
 
 
 </div>

@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -6,9 +7,10 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView
 from django.utils.text import slugify
 
+from articleapp.decorators import article_ownership_required
 from articleapp.forms import *
 from articleapp.models import *
 
@@ -63,12 +65,18 @@ def create_article(request):
                       context={"articleForm": articleForm, "formset": formset})
 
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(LoginRequiredMixin, DetailView):
     model = Article
     context_object_name = "current_article"
     template_name = "articleapp/detail.html"
 
 
+# @method_decorator(article_ownership_required, "get")
+# @method_decorator(article_ownership_required, "post")
+# class ArticleUpdateView(UpdateView):
+#     model = Article
+#     form_class = ArticleCreationForm
+#     template_name = "articleapp/update.html"
 
 
 

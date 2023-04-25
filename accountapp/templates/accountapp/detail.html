@@ -4,7 +4,7 @@
 
     <div class="accountDetail nanum_myeongjo">
         <p>
-            {{ current_user.date_joined }}
+            With us from {{ current_user.date_joined }}
         </p>
 
         {% if current_user.profile and current_user == user %}
@@ -25,6 +25,7 @@
                 Create Profile
         </a>
         {% endif %}
+
         {% if current_user == user %}
         <a class="mypageBtn mb-4" href="{% url 'accountapp:update' pk=current_user.pk %}">
                 Modify Account Info
