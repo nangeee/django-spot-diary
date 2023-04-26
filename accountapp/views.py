@@ -68,11 +68,12 @@ class AccountCreateView(LoginRequiredMixin, CreateView):  # django.views.generic
 
 # Class Based View에서 login required 데코레이터 사용하려면
 # 첫 번째 인자로 LoginRequiredMixin 전달
+# 또는 method_decorator를 get 함수에만 적용 (DetailView에는 get 메서드만 존재함)
+@method_decorator(account_ownership_required, "get")
 class AccountDetailView(LoginRequiredMixin, DetailView):  # django.views.generic.DetailView
     model = User
     context_object_name = "current_user"
     template_name = "accountapp/detail.html"
-
 
 
 # Account 정보 수정 -> AccountUpdateView
@@ -84,7 +85,6 @@ class AccountUpdateView(UpdateView):
     form_class = AccountUpdateForm
     success_url = reverse_lazy("accountapp:helloWorld")
     template_name = "accountapp/update.html"
-
 
 
 # Account 삭제 -> AccountDeleteView

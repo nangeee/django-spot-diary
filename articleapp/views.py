@@ -5,9 +5,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import DetailView, UpdateView
+from django.views.generic import DetailView, UpdateView, DeleteView
 from django.utils.text import slugify
 
 from articleapp.decorators import article_ownership_required
@@ -65,18 +65,30 @@ def create_article(request):
                       context={"articleForm": articleForm, "formset": formset})
 
 
-class ArticleDetailView(LoginRequiredMixin, DetailView):
+# DetailView에는 get 메서드만 존재하므로 get 메서드에만 데코레이터 적용.
+# 또는 leftmost 파라미터로 LoginRequiredMixin 전달
+@method_decorator(login_required, "get")
+@method_decorator(article_ownership_required, "get")
+class ArticleDetailView(DetailView):
     model = Article
     context_object_name = "current_article"
     template_name = "articleapp/detail.html"
 
 
-# @method_decorator(article_ownership_required, "get")
-# @method_decorator(article_ownership_required, "post")
-# class ArticleUpdateView(UpdateView):
-#     model = Article
-#     form_class = ArticleCreationForm
-#     template_name = "articleapp/update.html"
+@method_decorator(article_ownership_required, "get")
+@method_decorator(article_ownership_required, "post")
+class ArticleUpdateView(UpdateView):
+    model = Article
+    form_class = ArticleCreationForm
+    template_name = "articleapp/update.html"
+
+
+@method_decorator(article_ownership_required, "get")
+@method_decorator(article_ownership_required, "post")
+class ArticleDeleteView(DeleteView):
+    model = Article
+    success_url = reverse_lazy("articleapp:delete")
+    template_name = "articleapp/delete.html"
 
 
 

@@ -81,7 +81,8 @@ a:hover {
     width: 40%;
     text-align: center;
     border-radius: 5rem;
-    margin-left: 180px;
+    /* margin-left: 180px; */
+    margin: auto;
 }
 
 .header_menu > * {
@@ -126,11 +127,26 @@ a:hover {
 }
 
 .article_container {
+    padding: 20px;
     width: 60%;
-    height: 40vh;
     border: red solid 3px;
     /* display: grid; */
     margin: auto;
-    background-color: gray;
     text-align: center;
 }
+
+.article_title {
+    margin-bottom: 20px;
+}
+
+.myarticleBtn {
+    display: inline-block;
+    border: solid black 2px;
+    width: 10%;
+    text-align: center;
+    border-radius: 5rem;
+    margin: auto;
+    height: 5vh;
+    line-height: 5vh;
+}
+
