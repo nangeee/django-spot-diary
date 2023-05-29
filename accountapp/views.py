@@ -50,7 +50,7 @@ def helloWorld(request):
 
 
 # Class Based View로 Account Creation View 생성
-class AccountCreateView(LoginRequiredMixin, CreateView):  # django.views.generic.CreateView
+class AccountCreateView(CreateView):  # django.views.generic.CreateView
     # 무슨 모델을 사용? -> 장고 기본 제공 User
     model = User  # django.contrib.auth.models.User -> ctrl + B 로 소스코드 확인
 

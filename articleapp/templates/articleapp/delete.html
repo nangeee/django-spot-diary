@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+
+{% block content %}
+
+    <div class="nanum_myeongjo accountapp_content createAccountForm">
+        <div class="mb-3">
+            <h3>Click the button below to Delete your Article {{ current_article.title }}</h3>
+        </div>
+        <form action="{% url 'articleapp:delete' pk=current_article.pk %}" method="post">
+            {% csrf_token %}
+            <input class="btn btn-outline-dark rounded-pill col-4 mt-3" type="submit" value="Delete">
+        </form>
+    </div>
+
+{% endblock %}

@@ -6,7 +6,7 @@
 
     <div class="nanum_myeongjo profileapp_content createProfileForm">
         <div class="mb-5">
-            <h3>Make Profile</h3>
+            <h3>Create Profile</h3>
         </div>
         <form action="{% url 'profileapp:createProfile' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}

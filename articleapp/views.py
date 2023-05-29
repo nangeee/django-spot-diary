@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.urls import reverse, reverse_lazy
@@ -75,19 +75,83 @@ class ArticleDetailView(DetailView):
     template_name = "articleapp/detail.html"
 
 
-@method_decorator(article_ownership_required, "get")
-@method_decorator(article_ownership_required, "post")
-class ArticleUpdateView(UpdateView):
-    model = Article
-    form_class = ArticleCreationForm
-    template_name = "articleapp/update.html"
+# @method_decorator(article_ownership_required, "get")
+# @method_decorator(article_ownership_required, "post")
+# class ArticleUpdateView(UpdateView):
+#     model = Article
+#     context_object_name = "current_article"
+#     form_class = ArticleCreationForm
+#     template_name = "articleapp/update.html"
+#
+#     def get_success_url(self):
+#         # self.object는 article
+#         # 해당 article의 pk
+#         return reverse("articleapp:detail", kwargs={"pk": self.object.pk})
+
+
+@article_ownership_required
+@article_ownership_required
+def ArticleUpdateView(request, pk):
+    # 하나의 modelform 을 여러번 쓸 수 있음. 모델, 모델폼, 몇 개의 폼을 띄울건지 갯수
+    ImageFormSet = modelformset_factory(ArticleImage, form=ArticleImageForm, extra=5, can_delete=False)
+
+    # fetch the object related to passed id
+    article_obj = get_object_or_404(Article, pk=pk)
+    img_obj_list = ArticleImage.objects.select_related().filter(article=pk)
+
+    # pass the object as instance in form
+    # form = ArticleCreationForm(request.POST or None, instance=article_obj)
+    # formset = ImageFormSet(request.POST or None, request.FILES,
+    #                        initial=[{"image": i.image} for i in img_obj_list], queryset=ArticleImage.objects.none())
+    # for f in formset:
+    #     print(f.as_table())
+
+    if request.method == "POST":
+        Article.objects.filter(pk=pk).update(
+            title=request.POST["title"],
+            place_name=request.POST["place_name"],
+            address=request.POST["address"],
+            content=request.POST["content"]
+        )
+
+        ### post에서의 formset
+        formset = ImageFormSet(request.POST, request.FILES, queryset=ArticleImage.objects.none())
+
+        # save the data from the form and
+        # redirect to detail_view
+        if formset.is_valid():
+
+            for img_from_form in formset.cleaned_data:
+                print("valid22", img_from_form)
+                # ArticleImageForm에 입력된 이미지 하나하나 저장 *** 원래 이미지는 어떻게 삭제 ?? ㅠㅠㅠㅠㅠ
+                if img_from_form:
+                    print("valid33", img_from_form["image"])
+                    image_file = img_from_form["image"]
+
+                    # image의 fk field(article)를, 현재 article로 설정하고 image field 지정
+                    complete_image = ArticleImage(article=article_obj, image=image_file)
+                    complete_image.save() # 각각의 image와 현재 article을 연결한 후 저장
+
+            return HttpResponseRedirect(reverse("articleapp:detail", kwargs={"pk": pk}))
+            # return HttpResponseRedirect("/" + id)
+
+    else:  # GET method
+        form = ArticleCreationForm(request.POST or None, instance=article_obj)
+        ### get에서의 formset
+        formset = ImageFormSet(request.POST or None,
+                               initial=[{"image": i.image} for i in img_obj_list], queryset=ArticleImage.objects.none())
+
+        return render(request, template_name="articleapp/update.html",
+                  context={"form": form, "formset": formset, "current_article": article_obj})
+
 
 
 @method_decorator(article_ownership_required, "get")
 @method_decorator(article_ownership_required, "post")
 class ArticleDeleteView(DeleteView):
     model = Article
-    success_url = reverse_lazy("articleapp:delete")
+    context_object_name = "current_article"
+    success_url = reverse_lazy("articleapp:list")
     template_name = "articleapp/delete.html"
 
 

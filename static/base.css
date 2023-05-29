@@ -108,13 +108,13 @@ a:hover {
 }
 
 .carousel-item {
-    height: 70vh;
-    line-height: 70vh;
+    height: 60vh;
+    line-height: 60vh;
     text-align: center;
 }
 
 .article_img {
-    width: 60%;
+    width: 50%;
     height: auto;
     verticle-align: middle;
 }

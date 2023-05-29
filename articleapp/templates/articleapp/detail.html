@@ -30,7 +30,7 @@
 </div>
 {% endif %}
 
-<div class="article_container">
+<div class="article_container mt-5">
     <h2 class="article_title"> {{ current_article.title }} </h2>
 
     <p> {{ current_article.place_name }} </p>
@@ -48,7 +48,7 @@
     <a class="myarticleBtn mb-4 mt-4" href="{% url 'articleapp:delete' pk=current_article.pk %}">
         <p class="myarticleBtnText">Delete</p>
     </a>
-{% endif %}
+    {% endif %}
 </div>
 
 
