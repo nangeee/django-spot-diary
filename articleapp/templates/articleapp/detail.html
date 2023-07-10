@@ -31,7 +31,11 @@
 {% endif %}
 
 <div class="article_container mt-5">
-    <h2 class="article_title"> {{ current_article.title }} </h2>
+    <h1 class="article_title"> {{ current_article.title }} </h1>
+
+    <h4 class="mb-3 article_writer"> {{ current_article.writer.profile.nickname }} </h4>
+
+    <hr>
 
     <p> {{ current_article.place_name }} </p>
 
@@ -49,6 +53,11 @@
         <p class="myarticleBtnText">Delete</p>
     </a>
     {% endif %}
+</div>
+<div class="btn_container mt-3">
+    <a class="myarticleBtn mb-4 mt-4" href="{% url 'articleapp:list' %}">
+        <p class="myarticleBtnText">Article List</p>
+    </a>
 </div>
 
 

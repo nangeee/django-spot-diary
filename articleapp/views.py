@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import DetailView, UpdateView, DeleteView
+from django.views.generic import DetailView, UpdateView, DeleteView, ListView
 from django.utils.text import slugify
 
 from articleapp.decorators import article_ownership_required
@@ -68,7 +68,6 @@ def create_article(request):
 # DetailView에는 get 메서드만 존재하므로 get 메서드에만 데코레이터 적용.
 # 또는 leftmost 파라미터로 LoginRequiredMixin 전달
 @method_decorator(login_required, "get")
-@method_decorator(article_ownership_required, "get")
 class ArticleDetailView(DetailView):
     model = Article
     context_object_name = "current_article"
@@ -89,7 +88,6 @@ class ArticleDetailView(DetailView):
 #         return reverse("articleapp:detail", kwargs={"pk": self.object.pk})
 
 
-@article_ownership_required
 @article_ownership_required
 def ArticleUpdateView(request, pk):
     # 하나의 modelform 을 여러번 쓸 수 있음. 모델, 모델폼, 몇 개의 폼을 띄울건지 갯수
@@ -154,6 +152,13 @@ class ArticleDeleteView(DeleteView):
     success_url = reverse_lazy("articleapp:list")
     template_name = "articleapp/delete.html"
 
+
+@method_decorator(login_required, "get")
+class ArticleListView(ListView):
+    model = Article
+    context_object_name = "article_list"
+    template_name = "articleapp/list.html"
+    paginate_by = 5  # 한 페이지에 노출되는 객체의 수 (article 수)
 
 
 

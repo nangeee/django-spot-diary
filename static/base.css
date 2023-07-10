@@ -89,6 +89,10 @@ a:hover {
     padding: 0 5px;
 }
 
+.btn_container {
+    text-align: center;
+}
+
 .container div {
   width: 250px;
   background-color: antiquewhite;
@@ -129,14 +133,20 @@ a:hover {
 .article_container {
     padding: 20px;
     width: 60%;
-    border: red solid 3px;
+    /* border: red solid 3px; */
     /* display: grid; */
+    border-radius: 30px;
+    background-color: #FEFEE9;
     margin: auto;
     text-align: center;
 }
 
 .article_title {
     margin-bottom: 20px;
+}
+
+.article_writer {
+    margin-left: 70%;
 }
 
 .myarticleBtn {
@@ -148,5 +158,10 @@ a:hover {
     margin: auto;
     height: 5vh;
     line-height: 5vh;
+}
+
+.pagination_container {
+    text-align: center;
+    margin: 1rem 0;
 }
 

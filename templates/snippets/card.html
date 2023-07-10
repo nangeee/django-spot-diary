@@ -1,0 +1,7 @@
+<div>
+    {% for cur in article.image.all %}
+    {% if forloop.first %}
+    <img src="{{ cur.image.url }}">
+    {% endif %}
+    {% endfor %}
+</div>
