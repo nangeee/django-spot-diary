@@ -37,7 +37,7 @@
 
     <hr>
 
-    <p> {{ current_article.place_name }} </p>
+    <h4 class="mb-4"> 🚀 {{ current_article.place_name }} </h4>
 
     <p> {{ current_article.address }} </p>
 
@@ -53,6 +53,18 @@
         <p class="myarticleBtnText">Delete</p>
     </a>
     {% endif %}
+
+    <hr>
+
+    {% include 'commentapp/create.html' with article=current_article %}
+
+    <hr>
+
+    {% for comment in current_article.comment.all %}
+        {% include 'commentapp/detail.html' with comment=comment %}
+    {% endfor %}
+
+
 </div>
 <div class="btn_container mt-3">
     <a class="myarticleBtn mb-4 mt-4" href="{% url 'articleapp:list' %}">

@@ -13,6 +13,7 @@
 <!--            {{ form }}-->
             {% bootstrap_form form form_group_class='mb-5' size='small'  %}
             <input class="btn btn-outline-dark rounded-pill col-4 mt-2" type="submit" >
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
         </form>
     </div>
 

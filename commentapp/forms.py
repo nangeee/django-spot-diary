@@ -1,3 +1,4 @@
+from django import forms
 from django.forms import ModelForm
 
 from commentapp.models import Comment
@@ -18,3 +19,11 @@ class CommentCreationForm(ModelForm):
     class Meta:
         model = Comment
         fields = ["content"]  # article, writer는 서버 단에서 작업
+
+        widgets = {
+            "content": forms.Textarea(attrs={"rows": 4, "placeholder": "What are your thoughts?"})
+        }
+
+        labels = {
+            "content": ""
+        }

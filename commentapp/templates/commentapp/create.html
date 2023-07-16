@@ -1,0 +1,28 @@
+
+{% load bootstrap5 %}
+
+{% block content %}
+
+    {% if user.profile %}
+    <div class="nanum_myeongjo accountapp_content createAccountForm">
+        <div class="mb-3">
+            <h3> 📝 Add a Comment</h3>
+        </div>
+        <form class="createForm" action="{% url 'commentapp:create' %}" method="post">
+            {% csrf_token %}
+<!--            {{ form }}-->
+<!--            {% bootstrap_form form %}-->
+            {% bootstrap_form form form_group_class='mb-3' size='small' %}
+            <input class="btn btn-outline-dark rounded-pill col-4 mt-2" type="submit" >
+            <input type="hidden" name="article_pk" value="{{ article.pk }}">
+            <!-- {{ article.pk }}에서 article: articleapp/detail에서 include 할 때 지정한 with article=current.article -->
+            <!-- self.request.POST['article_pk']로 접근 가능 -> comment의 귀속 article을 서버단에서 저장 -->
+        </form>
+    </div>
+    {% else %}
+    <p>Create your profile <a href="{% url 'profileapp:createProfile' %}?next={{ request.path }}">
+        <span class="createProfileText">here</span></a> to write comments!</p>
+    {% endif %}
+
+{% endblock %}
+

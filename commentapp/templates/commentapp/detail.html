@@ -1,0 +1,7 @@
+{% load static %}
+<div class="comment_container">
+    <img class="comment_profile_img" src="{{ comment.writer.profile.image.url }}">
+    <span> {{ comment.writer.profile.nickname }} </span>
+    <span class="comment_dttm"> {{ comment.created_time }}</span>
+    <p class="comment_content"> {{ comment.content }} </p>
+</div>

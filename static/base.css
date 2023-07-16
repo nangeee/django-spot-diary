@@ -165,3 +165,31 @@ a:hover {
     margin: 1rem 0;
 }
 
+.comment_profile_img {
+    width: 4%;
+    height: 4%;
+}
+
+.createProfileText {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.comment_container {
+    text-align: left;
+    margin-left: 2rem;
+}
+
+.comment_profile_img {
+    border-radius: 30rem;
+}
+
+.comment_dttm {
+    color: darkgray;
+    font-size: 0.8rem;
+    margin-left: 0.8rem;
+}
+
+.comment_content {
+    font-size: 1.3rem;
+}

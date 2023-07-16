@@ -9,10 +9,12 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, UpdateView, DeleteView, ListView
 from django.utils.text import slugify
+from django.views.generic.edit import FormMixin
 
 from articleapp.decorators import article_ownership_required
 from articleapp.forms import *
 from articleapp.models import *
+from commentapp.forms import CommentCreationForm
 
 
 @login_required
@@ -68,10 +70,11 @@ def create_article(request):
 # DetailView에는 get 메서드만 존재하므로 get 메서드에만 데코레이터 적용.
 # 또는 leftmost 파라미터로 LoginRequiredMixin 전달
 @method_decorator(login_required, "get")
-class ArticleDetailView(DetailView):
+class ArticleDetailView(DetailView, FormMixin):
     model = Article
     context_object_name = "current_article"
     template_name = "articleapp/detail.html"
+    form_class = CommentCreationForm
 
 
 # @method_decorator(article_ownership_required, "get")
