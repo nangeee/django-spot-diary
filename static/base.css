@@ -149,7 +149,7 @@ a:hover {
     margin-left: 70%;
 }
 
-.myarticleBtn {
+.myarticleBtn, .comment_delete_confirm_btn {
     display: inline-block;
     border: solid black 2px;
     width: 10%;
@@ -165,11 +165,6 @@ a:hover {
     margin: 1rem 0;
 }
 
-.comment_profile_img {
-    width: 4%;
-    height: 4%;
-}
-
 .createProfileText {
     font-weight: 700;
     text-decoration: underline;
@@ -181,6 +176,8 @@ a:hover {
 }
 
 .comment_profile_img {
+    width: 5%;
+    height: 5%;
     border-radius: 30rem;
 }
 
@@ -193,3 +190,31 @@ a:hover {
 .comment_content {
     font-size: 1.3rem;
 }
+
+
+.comment_delete_btn {
+    background-color: transparent;
+    background-image: url("./dustbin.png");
+    background-size: cover;
+    width: 0.8rem;
+    height: 0.8rem;
+    border: none;
+}
+
+.comment_delete_btn2 {
+    background-color: transparent;
+    width: 0.8rem;
+    height: 0.8rem;
+    border: none;
+}
+
+.comment_delete_img {
+    width: 0.8rem;
+    height: 0.8rem;
+}
+
+.comment_del_confirm {
+    display: inline-block;
+    width: 100%;
+}
+

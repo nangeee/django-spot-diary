@@ -1,0 +1,24 @@
+<div class="modal fade" id="comment_delete_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Comment Delete Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Do you really want to delete your comment?
+            </div>
+            <div class="modal-footer">
+
+                <form id="comment_delete_form" class="post-form col-4" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Yes"
+                       class="comment_del_confirm btn btn-danger rounded-pill">
+                </form>
+                <button type="button" class="btn btn-outline-dark rounded-pill col-4 mt-2" data-bs-dismiss="modal">No
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>

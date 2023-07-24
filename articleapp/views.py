@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.forms import modelformset_factory
+from django.forms import modelformset_factory, Form
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
