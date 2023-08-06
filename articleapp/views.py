@@ -161,7 +161,7 @@ class ArticleListView(ListView):
     model = Article
     context_object_name = "article_list"
     template_name = "articleapp/list.html"
-    paginate_by = 5  # 한 페이지에 노출되는 객체의 수 (article 수)
+    paginate_by = 10  # 한 페이지에 노출되는 객체의 수 (article 수)
 
 
 

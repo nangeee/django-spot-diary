@@ -30,8 +30,8 @@
 </div>
 {% endif %}
 
-<div class="article_container mt-5">
-    <h1 class="article_title"> {{ current_article.title }} </h1>
+<div class="article_container mt-3">
+    <h2 class="article_title"> {{ current_article.title }} </h2>
 
     <h4 class="mb-3 article_writer"> {{ current_article.writer.profile.nickname }} </h4>
 
@@ -49,9 +49,14 @@
     <a class="myarticleBtn mb-4 mt-4" href="{% url 'articleapp:update' pk=current_article.pk %}">
         <p class="myarticleBtnText">Modify</p>
     </a>
-    <a class="myarticleBtn mb-4 mt-4" href="{% url 'articleapp:delete' pk=current_article.pk %}">
-        <p class="myarticleBtnText">Delete</p>
-    </a>
+
+    <button id="articleDelBtn" class="myarticleBtn mb-4 mt-4" data-bs-toggle="modal" data-bs-target="#article_delete_modal"
+        value="{{ current_article.pk }}" onclick="sendArticlePk(this.value)">
+        Delete
+    </button>
+
+    {% include 'articleapp/delete.html' with article=current_article %}
+
     {% endif %}
 
     <hr>
@@ -66,11 +71,11 @@
 
 
 </div>
-<div class="btn_container mt-3">
+
     <a class="myarticleBtn mb-4 mt-4" href="{% url 'articleapp:list' %}">
-        <p class="myarticleBtnText">Article List</p>
+        <span>Article List</span>
     </a>
-</div>
+
 
 
 {% endblock %}

@@ -10,7 +10,7 @@
             {% csrf_token %}
 <!--            {{ form }}-->
 <!--            {% bootstrap_form form %}-->
-            {% bootstrap_form form form_group_class='mb-3' size='small' %}
+            {% bootstrap_form form form_group_class='mb-3'%}
             <input class="btn btn-outline-dark rounded-pill col-4 mt-2" type="submit" >
             <input type="hidden" name="article_pk" value="{{ article.pk }}">
             <!-- {{ article.pk }}에서 article: articleapp/detail에서 include 할 때 지정한 with article=current.article -->

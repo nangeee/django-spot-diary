@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DeleteView
 
 from articleapp.models import Article
+from commentapp.decorators import comment_ownership_required
 from commentapp.forms import CommentCreationForm
 from commentapp.models import Comment
 
@@ -30,7 +31,9 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         return reverse("articleapp:detail", kwargs={"pk": self.object.article.pk})
 
 
-class CommentDeleteView(DeleteView):
+@method_decorator(comment_ownership_required, "get")
+@method_decorator(comment_ownership_required, "post")
+class CommentDeleteView(LoginRequiredMixin, DeleteView):
     model = Comment
     context_object_name = "current_comment"
     template_name = "commentapp/delete.html"

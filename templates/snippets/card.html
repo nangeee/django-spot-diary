@@ -1,7 +1,12 @@
-<div>
+{% load static %}
+
+
+    {% if article.image.all|length > 0 %}
     {% for cur in article.image.all %}
     {% if forloop.first %}
     <img src="{{ cur.image.url }}">
     {% endif %}
     {% endfor %}
-</div>
+    {% else %}
+    <img src="{% static 'no_image.jpg' %}">
+    {% endif %}

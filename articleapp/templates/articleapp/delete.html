@@ -1,17 +1,27 @@
-{% extends 'base.html' %}
+<div class="modal fade" id="article_delete_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Article Delete Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Do you really want to delete this Article?
+            </div>
+            <div class="modal-footer">
 
-{% load bootstrap5 %}
+                <form id="article_delete_form" class="post-form col-4" method="post"
+                    action="{% url 'articleapp:delete' pk=article.pk %}">
+                    {% csrf_token %}
+                    <input type="submit" value="Yes"
+                       class="comment_del_confirm btn btn-danger rounded-pill">
+                </form>
+                <button type="button" class="btn btn-outline-dark rounded-pill col-4 mt-2" data-bs-dismiss="modal">No
+                </button>
 
-{% block content %}
-
-    <div class="nanum_myeongjo accountapp_content createAccountForm">
-        <div class="mb-3">
-            <h3>Click the button below to Delete your Article {{ current_article.title }}</h3>
+            </div>
         </div>
-        <form action="{% url 'articleapp:delete' pk=current_article.pk %}" method="post">
-            {% csrf_token %}
-            <input class="btn btn-outline-dark rounded-pill col-4 mt-3" type="submit" value="Delete">
-        </form>
     </div>
+</div>
 
-{% endblock %}
+

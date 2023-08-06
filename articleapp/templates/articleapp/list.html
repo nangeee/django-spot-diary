@@ -8,10 +8,8 @@
 {% if article_list %}
 <div class="container">
     {% for article in article_list %}
-    <a href="{% url 'articleapp:detail' pk=article.pk %}">
-        <div>
+    <a class="article_img_div" href="{% url 'articleapp:detail' pk=article.pk %}">
             {% include 'snippets/card.html' with article=article %}
-        </div>
     </a>
     {% endfor %}
 </div>

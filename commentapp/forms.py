@@ -21,7 +21,7 @@ class CommentCreationForm(ModelForm):
         fields = ["content"]  # article, writer는 서버 단에서 작업
 
         widgets = {
-            "content": forms.Textarea(attrs={"rows": 4, "placeholder": "What are your thoughts?"})
+            "content": forms.Textarea(attrs={"rows": 5, "placeholder": "What are your thoughts?", "cols": 100})
         }
 
         labels = {
