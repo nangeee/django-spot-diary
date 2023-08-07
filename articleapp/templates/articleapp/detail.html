@@ -7,7 +7,7 @@
 {% block content %}
 
 {% if current_article.image.all|length >= 1 %}
-<div id="carouselContainer">
+<div id="carouselContainer nanum_myeongjo">
     <div id="articleImgCarousel" class="carousel carousel-dark slide">
         {% for cur in current_article.image.all %}
         <div class="carousel-inner">
@@ -30,7 +30,7 @@
 </div>
 {% endif %}
 
-<div class="article_container mt-3">
+<div class="article_container mt-3 nanum_myeongjo">
     <h2 class="article_title"> {{ current_article.title }} </h2>
 
     <h4 class="mb-3 article_writer"> {{ current_article.writer.profile.nickname }} </h4>

@@ -6,7 +6,7 @@
         <div class="mb-3">
             <h3> 📝 Add a Comment</h3>
         </div>
-        <form class="createForm" action="{% url 'commentapp:create' %}" method="post">
+        <form class="creationForm" action="{% url 'commentapp:create' %}" method="post">
             {% csrf_token %}
 <!--            {{ form }}-->
 <!--            {% bootstrap_form form %}-->

@@ -54,8 +54,11 @@ INSTALLED_APPS = [
     "bootstrap5",
     "accountapp",
     "profileapp",
+    "placeapp",
     "articleapp",
     "commentapp",
+    "sitecategoryapp",
+    "curationapp",
 ]
 
 MIDDLEWARE = [

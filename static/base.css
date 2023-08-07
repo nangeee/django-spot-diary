@@ -45,7 +45,7 @@
     margin-top: 1rem;
 }
 
-.accountapp_content, .profileapp_content {
+.creationForm_content {
     /* height:20rem; */
     height: auto;
     margin:2rem;
@@ -60,21 +60,19 @@
     width:7%;
 }
 
-.loginForm, .createAccountForm, .accountDetail, .createProfileForm {
+.loginForm, .accountDetail, .creationForm {
     margin: 2rem auto;
     width: 80%;
     max-width: 600px;
     text-align:center;
 }
 
-.createForm {
-    text-align: center;
-}
 
 .profileImg {
     max-width: 30%;
     height: auto;
     border-radius: 10rem;
+    object-fit: cover;
 }
 
 a:link , a:visited{
@@ -82,7 +80,7 @@ a:link , a:visited{
     text-decoration: none;
 }
 
-a:hover {
+a:hover, button:hover {
     color: #7878AA;
 }
 
@@ -96,12 +94,34 @@ a:hover {
     border: solid black 2px;
     width: 60%;
     max-width: 200px;
-    height: auto;
+    height: 3rem;
+    line-height: 200%;
     text-align: center;
     border-radius: 5rem;
     /* margin-left: 180px; */
     margin: auto;
     padding: 5px;
+    background: transparent;
+}
+
+.categoryBtn {
+    display: block;
+    border: solid black 2px;
+    width: 30%;
+    max-width: 200px;
+    height: 3rem;
+    line-height: 200%;
+    text-align: center;
+    border-radius: 5rem;
+    /* margin-left: 180px; */
+    margin: auto;
+    padding: 5px;
+    background: black;
+    color: white;
+}
+
+.categoryBtn:hover {
+    color: #7878AA;
 }
 
 .btn_container {
@@ -114,19 +134,54 @@ a:hover {
     margin: 0 auto;
 }
 
-.article_img_div {
-  width: 45%;
-  max-width: 250px;
-  border-radius: 15px;
-}
-
 .container div {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.container img {
+.site_category_container {
+    width: 85%;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.site_category_container h3 {
+    flex-basis: 100%;
+    background-color: rgba(120, 120, 120, 0.2);
+    height: 3rem;
+    line-height: 3rem;
+    padding-left: 2.5rem;
+    font-weight: 700;
+}
+
+.site_category_card {
+   display: flex;
+   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.card_div {
+  width: 45%;
+  max-width: 250px;
+  border-radius: 15px;
+}
+
+
+.category_card_img {
+  width: 7rem;
+  height: 7rem;
+  object-fit: cover;
+  border-radius: 15px;
+  margin: 0 10px;
+}
+
+.article_list_img {
     width: 100%;
     border-radius: 15px;
 }
@@ -248,5 +303,42 @@ a:hover {
     html{
         font-size: 13px;
     }
+}
+
+
+.category_detail_img {
+    width: 14rem;
+    height: 15rem;
+    object-fit: cover;
+    border-radius: 15px;
+    margin: 0 auto;
+}
+
+.category_detail_img_container {
+    text-align: center;
+}
+
+.categoryContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    border: solid lightgray 1px;
+    border-radius: 7px;
+}
+
+.innerCategoryContainer {
+    display: flex;
+    flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  max-width: 250px;
+
+}
+
+.innerCategoryContainer p {
+    background-color: rgba(120, 120, 120, 0.2);
+    padding: 5px 5px;
 }
 

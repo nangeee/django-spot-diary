@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% if sitecategory_list %}
+
+{% for parent in sitecategory_list %}
+<div class="site_category_container mt-5 nanum_myeongjo">
+    <h3 class="mb-3">{{ parent.name }}</h3>
+    {% for child in parent.childcategory.all %}
+        <div class="site_category_card">
+            <a href="{% url 'sitecategoryapp:detail' pk=child.pk %}">
+                <img class="category_card_img" src="{{ child.image.url }}">
+            </a>
+            <span class="mt-2 mb-3">{{ child.name }}</span>
+        </div>
+    {% endfor %}
+</div>
+{% endfor %}
+
+{% else %}
+
+<div class="container">
+    <h1>No categories yet.</h1>
+</div>
+
+{% endif %}
+
+
+{% endblock %}

@@ -4,9 +4,9 @@
     {% if article.image.all|length > 0 %}
     {% for cur in article.image.all %}
     {% if forloop.first %}
-    <img src="{{ cur.image.url }}">
+    <img class="article_list_img" src="{{ cur.image.url }}">
     {% endif %}
     {% endfor %}
     {% else %}
-    <img src="{% static 'no_image.jpg' %}">
+    <img class="article_list_img" src="{% static 'no_image.jpg' %}">
     {% endif %}

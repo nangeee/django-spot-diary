@@ -8,7 +8,7 @@
 {% if article_list %}
 <div class="container">
     {% for article in article_list %}
-    <a class="article_img_div" href="{% url 'articleapp:detail' pk=article.pk %}">
+    <a class="card_div" href="{% url 'articleapp:detail' pk=article.pk %}">
             {% include 'snippets/card.html' with article=article %}
     </a>
     {% endfor %}

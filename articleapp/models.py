@@ -4,6 +4,8 @@ from django.db import models
 # Create your models here.
 from django.utils.text import slugify
 
+from curationapp.models import Curation
+
 
 class Article(models.Model):
     writer = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="article", null=True)
@@ -16,6 +18,8 @@ class Article(models.Model):
     # image = models.ImageField(upload_to="article/", null=False)
     content = models.TextField()
     created_time = models.DateField(auto_now_add=True, null=False)
+
+    curation = models.ForeignKey(Curation, null=True, related_name="curation", on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = "Article"

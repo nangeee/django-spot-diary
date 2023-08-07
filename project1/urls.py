@@ -22,8 +22,11 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("accountapp.urls")),
     path("profiles/", include("profileapp.urls")),
+    path("places/", include("placeapp.urls")),
     path("articles/", include("articleapp.urls")),
     path("comments/", include("commentapp.urls")),
+    path("siteCategories/", include("sitecategoryapp.urls")),
+    path("curations/", include("curationapp.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)   # django.conf.urls.static.static / django.conf.settings
 
 

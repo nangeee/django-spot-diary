@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load bootstrap5 %}
+
+{% block content %}
+
+<div class="nanum_myeongjo creationForm_content creationForm">
+    <div class="mb-5">
+        <h3>🗺️ Add Your Place</h3>
+    </div>
+    <form class="createForm placeForm" action="{% url 'placeapp:create' %}" method="post">
+        {% csrf_token %}
+
+        {% bootstrap_form form form_group_class='mb-5' size='small' %}
+
+        <p class="mb-2">Select Categories</p>
+        <div class="categoryContainer">
+            {% for parent in parent_categories %}
+            <div class="innerCategoryContainer mb-2 mt-2">
+                <p class="mb-2">{{ parent.name }}</p>
+                {% for child in parent.childcategory.all %}
+                    <div class="mb-2">
+                        <input id="{{ child.name }}" type="checkbox">
+                        <label for="{{ child.name }}">{{ child.name }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+        <input class="btn btn-outline-dark rounded-pill col-4 mt-2" type="submit" >
+    </form>
+</div>
+
+{% endblock %}
