@@ -1,11 +1,11 @@
 from django.urls import path
 
-from placeapp.views import create_profile, PlaceListView
+from placeapp.views import PlaceListView, create_place
 
 app_name = "placeapp"
 
 urlpatterns = [
-    path("create/", create_profile, name="create"),
+    path("create/", create_place, name="create"),
     path("list/", PlaceListView.as_view(), name="list"),
     # path("detail/<int:pk>", PlaceDetailView.as_view(), name="detail"),
 ]

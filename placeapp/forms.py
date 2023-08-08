@@ -7,7 +7,7 @@ from placeapp.models import Place
 class PlaceCreationForm(ModelForm):
     class Meta:
         model = Place
-        fields = ["name", "address"]
+        fields = ["name"]
 
         widgets = {
             "name": forms.TextInput(attrs={"placeholder": "Enter the Place Name"}),

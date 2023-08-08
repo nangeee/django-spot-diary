@@ -342,3 +342,20 @@ a:hover, button:hover {
     padding: 5px 5px;
 }
 
+#place_address_container {
+    font-size: small;
+    text-align: center;
+    dixplay: flex;
+    flex-wrap: wrap;
+    justify: center;
+}
+
+#place_address_container input {
+    text-align: left;
+}
+
+#place_address_container button {
+    border: none;
+    background-color: rgba(120, 120, 120, 0.2);
+}
+
