@@ -1,11 +1,14 @@
+from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView, FormView
 
-from placeapp.forms import PlaceCreationForm
+from articleapp.forms import ArticleCreationForm, ArticleImageForm
+from articleapp.models import ArticleImage
+from placeapp.forms import PlaceCreationForm, PlaceSearchForm
 from placeapp.models import Place
 from sitecategoryapp.models import SiteCategory, ChildCategory
 
@@ -24,6 +27,8 @@ def create_place(request):
 
             if not complete_place_form.first_discoverer:
                 complete_place_form.first_discoverer = request.user
+
+            print("===========", complete_place_form.first_discoverer)
 
             place_address_frag = [request.POST.get("mainAddress")]
             if request.POST.get("detailAddress"):
@@ -59,12 +64,38 @@ def create_place(request):
                         context={"form": place_form, "parent_categories": parent_categories})
 
 
-class PlaceCreateView(CreateView):
-    model = Place
-    template_name = "placeapp/create.html"
-    # success_url = reverse_lazy("placeapp:detail", kwargs={"pk":})
-    form_class = PlaceCreationForm
-
-
 class PlaceListView(ListView):
     model = Place
+
+
+class PlaceDetailView(DetailView):
+    model = Place
+    context_object_name = "current_place"
+    template_name = "sitecategoryapp/detail.html"
+
+
+class ImageFormSet:
+    pass
+
+
+def search_place(request):
+    if request.method == "POST":
+        searching_place = request.POST.get("searching_place")
+        print(searching_place)
+        place_list = Place.objects.filter(name__icontains=searching_place)
+        print(place_list)
+        placeSearchForm = PlaceSearchForm(request.POST)
+
+        articleForm = ArticleCreationForm()
+        # 하나의 modelform 을 여러번 쓸 수 있음. 모델, 모델폼, 몇 개의 폼을 띄울건지 갯수
+        ImageFormSet = modelformset_factory(ArticleImage, form=ArticleImageForm, extra=5)
+        formset = ImageFormSet(queryset=ArticleImage.objects.none())
+
+        return render(request, template_name="articleapp/createArticle.html", context={"searching_place": searching_place,
+            "articleForm": articleForm, "formset": formset, "place_list": place_list, "placeSearchForm": placeSearchForm})
+    else:
+        pass
+
+
+
+

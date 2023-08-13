@@ -1,0 +1,36 @@
+{% load static %}
+{% load bootstrap5 %}
+
+<div class="modal fade" id="search_place_modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Search your place</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+
+
+
+
+                        {% if place_list %}
+                            {% for cur_place in place_list %}
+                            <p>{{ cur_place.name }}</p>
+                            <p>{{ cur_place.address }}</p>
+                            {% endfor %}
+                        {% elif place_to_search %}
+                            <p>" {{ place_to_search }} " Not Found</p>
+                            Add your place <a href="{% url 'placeapp:create' %}">here</a>
+                        {% endif %}
+
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-outline-dark rounded-pill col-4 mt-2" data-bs-dismiss="modal">Exit
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>

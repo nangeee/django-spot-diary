@@ -2,12 +2,36 @@
 
 {% load bootstrap5 %}
 
+{% load static %}
+
 {% block content %}
 
     <div class="nanum_myeongjo creationForm_content creationForm">
         <div class="mb-5">
             <h3>게시글 작성</h3>
         </div>
+        <p> Place </p>
+        {% if searching_place %}
+            <form class="mb-2 searchContainer" action="{% url 'placeapp:search' %}" method="post">
+                {% csrf_token %}
+                {% bootstrap_form placeSearchForm form_group_class='mb-2' size='small'  %}
+                <input type="submit" value="search">
+            </form>
+            <div id="searchResultContainer" class="mb-4">
+                <p><b>{{ searching_place }}</b> 검색 결과입니다. 장소를 선택하세요. </p>
+                {% for place in place_list %}
+                {{ place.name }}
+                {{ place.address }}
+                {% endfor %}
+            </div>
+        {% else %}
+            <form class="mb-4 searchContainer" action="{% url 'placeapp:search' %}" method="post">
+                {% csrf_token %}
+                {% bootstrap_form placeSearchForm form_group_class='mb-2' size='small'%}
+                <input id="searchContainerBtn" type="submit" value="search">
+            </form>
+        {% endif %}
+
         <form class="createForm" action="{% url 'articleapp:create' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 <!--            {{ articleForm.as_p }}-->
@@ -15,14 +39,37 @@
 <!--            부트스트랩 form 적용 가능하다!!!-->
             {% bootstrap_form articleForm form_group_class='mb-5' size='small'  %}
 
-<!--            <h6> {{ articleForm.title.label }} </h6>-->
-<!--            <p class="articleform_field"> {{ articleForm.title }} </p>-->
-<!--            <h6> {{ articleForm.place_name.label }} </h6>-->
-<!--            <p class="articleform_field"> {{ articleForm.place_name }} </p>-->
-<!--            <h6> {{ articleForm.address.label }} </h6>-->
-<!--            <p class="articleform_field"> {{ articleForm.address }} </p>-->
-<!--            <h6> {{ articleForm.content.label }} </h6>-->
-<!--            <p class="articleform_field"> {{ articleForm.content }} </p>-->
+            <p> Place </p>
+            <div id="placeAddressContainer" class="mb-5">
+
+                <input type="text" id="placeName" name="placeName" placeholder="Enter your place" style="width: 70%;"
+                       class="mb-2">
+                <button id="searchPlaceBtn" type="button" style="width: 20%;"
+                        data-bs-toggle="modal" data-bs-target="#search_place_modal"
+                        class="mb-2">Search Place</button>
+            </div>
+
+            <!--               모달 팝업창                 -->
+            <div class="modal fade" id="search_place_modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Search your place</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-outline-dark rounded-pill col-4 mt-2" data-bs-dismiss="modal">Exit
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             {{ formset.management_form }}
             {% for form in formset %}

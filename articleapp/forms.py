@@ -10,19 +10,15 @@ class ArticleCreationForm(ModelForm):
     class Meta:
         model = Article
 
-        fields = ["title", "place_name", "address", "content"]  # writer는 서버 단에서 작업
+        fields = ["title", "content"]  # writer, place는 서버 단에서 작업
 
         labels = {
             "title": gettext_lazy("Title"),
-            "place_name": gettext_lazy("Place Name"),
-            "address": gettext_lazy("Address"),
             "content": gettext_lazy("Comment / Memory about this place"),
         }
 
         widgets = {
             "title": forms.TextInput(attrs={"placeholder": "Enter the title of your article"}),
-            "place_name": forms.TextInput(attrs={"placeholder": "Enter the name of your place"}),
-            "address": forms.TextInput(attrs={"placeholder": "Enter the address of your place"}),
             "content": forms.Textarea(attrs={"placeholder": "Write a comment or Share your memory about your place"})
         }
 

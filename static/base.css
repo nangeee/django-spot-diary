@@ -158,7 +158,7 @@ a:hover, button:hover {
     font-weight: 700;
 }
 
-.site_category_card {
+.site_category_card, .place_card {
    display: flex;
    flex-direction: column;
   justify-content: center;
@@ -342,7 +342,7 @@ a:hover, button:hover {
     padding: 5px 5px;
 }
 
-#place_address_container {
+#placeAddressContainer {
     font-size: small;
     text-align: center;
     dixplay: flex;
@@ -350,12 +350,29 @@ a:hover, button:hover {
     justify: center;
 }
 
-#place_address_container input {
+#placeAddressContainer input {
     text-align: left;
 }
 
-#place_address_container button {
+#placeAddressContainer button {
     border: none;
     background-color: rgba(120, 120, 120, 0.2);
 }
+
+.searchContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.searchContainer :nth-child(1) {
+    width: 17rem;
+    margin-right: 1rem;
+}
+
+#searchContainerBtn {
+    border: none;
+    background-color: rgba(120, 120, 120, 0.2);
+    height: 2rem;
+}
+
 

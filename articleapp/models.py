@@ -5,6 +5,7 @@ from django.db import models
 from django.utils.text import slugify
 
 from curationapp.models import Curation
+from placeapp.models import Place
 
 
 class Article(models.Model):
@@ -13,8 +14,7 @@ class Article(models.Model):
     # related_name="article" -> user.article로 접근 가능
 
     title = models.CharField(max_length=200)
-    place_name = models.CharField(max_length=100, null=False) # 장소 이름 (식당 이름, 서점 이름 등)
-    address = models.CharField(max_length=300)
+    place = models.ForeignKey(Place, null=True, on_delete=models.SET_NULL, related_name="articles")
     # image = models.ImageField(upload_to="article/", null=False)
     content = models.TextField()
     created_time = models.DateField(auto_now_add=True, null=False)

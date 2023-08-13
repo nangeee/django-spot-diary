@@ -9,12 +9,13 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, UpdateView, DeleteView, ListView
 from django.utils.text import slugify
-from django.views.generic.edit import FormMixin
+from django.views.generic.edit import FormMixin, FormView
 
 from articleapp.decorators import article_ownership_required
 from articleapp.forms import *
 from articleapp.models import *
 from commentapp.forms import CommentCreationForm
+from placeapp.forms import PlaceSearchForm
 
 
 @login_required
@@ -62,9 +63,10 @@ def create_article(request):
     else:
         articleForm = ArticleCreationForm()
         formset = ImageFormSet(queryset=ArticleImage.objects.none())
+        placeSearchForm = PlaceSearchForm()
 
         return render(request, template_name="articleapp/createArticle.html",
-                      context={"articleForm": articleForm, "formset": formset})
+                      context={"articleForm": articleForm, "formset": formset, "placeSearchForm": placeSearchForm})
 
 
 # DetailView에는 get 메서드만 존재하므로 get 메서드에만 데코레이터 적용.
@@ -162,7 +164,6 @@ class ArticleListView(ListView):
     context_object_name = "article_list"
     template_name = "articleapp/list.html"
     paginate_by = 10  # 한 페이지에 노출되는 객체의 수 (article 수)
-
 
 
 
