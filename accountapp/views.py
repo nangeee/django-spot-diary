@@ -10,12 +10,13 @@ from django.urls import reverse, reverse_lazy
 # Create your views here.
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic.list import MultipleObjectMixin
 
 from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountUpdateForm, UserCreationForm2, LoginForm2
 # from accountapp.forms import AccountUpdateForm
 from accountapp.models import User as myUser
-
+from articleapp.models import Article
 
 ownership_authenticated = [
     account_ownership_required,
@@ -70,10 +71,17 @@ class AccountCreateView(CreateView):  # django.views.generic.CreateView
 # 첫 번째 인자로 LoginRequiredMixin 전달
 # 또는 method_decorator를 get 함수에만 적용 (DetailView에는 get 메서드만 존재함)
 @method_decorator(account_ownership_required, "get")
-class AccountDetailView(LoginRequiredMixin, DetailView):  # django.views.generic.DetailView
+class AccountDetailView(LoginRequiredMixin, DetailView, MultipleObjectMixin):  # django.views.generic.DetailView
     model = User
     context_object_name = "current_user"
     template_name = "accountapp/detail.html"
+
+    # MultipleObjectMixin 적용 후
+    paginate_by = 25
+
+    def get_context_data(self, **kwargs):
+        object_list = Article.objects.filter(writer=self.get_object())
+        return super(AccountDetailView, self).get_context_data(object_list=object_list, **kwargs)
 
 
 # Account 정보 수정 -> AccountUpdateView

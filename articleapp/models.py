@@ -6,12 +6,15 @@ from django.utils.text import slugify
 
 from curationapp.models import Curation
 from placeapp.models import Place
+from projectapp.models import Project
 
 
 class Article(models.Model):
     writer = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="article", null=True)
     # on_delete=models.SET_NULL -> user가 삭제되었을 때, article은 삭제되지 않고 user만 알 수 없음으로 바뀜
     # related_name="article" -> user.article로 접근 가능
+
+    project = models.ForeignKey(Project, on_delete=models.SET_NULL, related_name="article", null=True)
 
     title = models.CharField(max_length=200)
     # place = models.ForeignKey(Place, null=True, on_delete=models.SET_NULL, related_name="articles")

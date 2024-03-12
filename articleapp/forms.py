@@ -10,10 +10,11 @@ class ArticleCreationForm(ModelForm):
     class Meta:
         model = Article
 
-        fields = ["title", "image", "content"]  # writer, place는 서버 단에서 작업
+        fields = ["title", "project", "image", "content"]  # writer, place는 서버 단에서 작업
 
         labels = {
             "title": gettext_lazy("Title"),
+            "project": gettext_lazy("Project"),
             "image": gettext_lazy("Image"),
             "content": gettext_lazy("Content"),
         }

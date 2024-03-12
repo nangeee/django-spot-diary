@@ -7,7 +7,6 @@
 {% block content %}
 
 
-
 <div class="article_container mt-3 nanum_myeongjo">
     <h2 class="article_title"> {{ current_project.title }} </h2>
 
@@ -19,8 +18,11 @@
 
     <p> {{ current_project.created_time }} </p>
 
-
 </div>
+
+    <div>
+        {% include 'snippets/list_fragment.html' with article_list=object_list %}
+    </div>
 
     <a class="myarticleBtn mb-4 mt-4" href="{% url 'projectapp:list' %}">
         <span>Project List</span>

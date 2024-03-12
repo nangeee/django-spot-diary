@@ -4,7 +4,7 @@
 
     <div class="accountDetail nanum_myeongjo">
         <p>
-            With us from {{ current_user.date_joined }}
+            Joined at {{ current_user.date_joined }}
         </p>
 
         {% if current_user.profile and current_user == user %}
@@ -34,6 +34,12 @@
                 Delete Account
         </a>
         {% endif %}
+    </div>
+
+    <div>
+
+        {% include 'snippets/list_fragment.html' with article_list=object_list %}
+
     </div>
 
 {% endblock %}

@@ -3,7 +3,9 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic.list import MultipleObjectMixin
 
+from articleapp.models import Article
 from projectapp.forms import ProjectCreationForm
 from projectapp.models import Project
 
@@ -21,10 +23,22 @@ class ProjectCreateView(CreateView):
         return reverse("projectapp:detail", kwargs={"pk": self.object.pk})
 
 
-class ProjectDetailView(DetailView):
+# MultipleObjectMixin: 여러 object를 다룰 수 있게 해줌
+class ProjectDetailView(DetailView, MultipleObjectMixin):
     model = Project
     template_name = "projectapp/detail.html"
     context_object_name = "current_project"
+
+    # article에 project 필드 추가 -> MultipleObjectMixin 추가한 후
+    paginate_by = 25
+
+    # 현 project에 속한 article만 가져오도록 필터링하는 메서드
+    # 템플릿에서 필터링된 object들 사용 가능
+    def get_context_data(self, **kwargs):
+        object_list = Article.objects.filter(project=self.get_object())
+        return super(ProjectDetailView, self).get_context_data(object_list=object_list, **kwargs)
+
+
 
 
 class ProjectListView(ListView):
