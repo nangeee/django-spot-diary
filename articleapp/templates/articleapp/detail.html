@@ -6,29 +6,7 @@
 
 {% block content %}
 
-{% if current_article.image.all|length >= 1 %}
-<div id="carouselContainer nanum_myeongjo">
-    <div id="articleImgCarousel" class="carousel carousel-dark slide">
-        {% for cur in current_article.image.all %}
-        <div class="carousel-inner">
-            <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
-                <img src="{{ cur.image.url }}" class="article_img" alt="...">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#articleImgCarousel"
-                data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#articleImgCarousel"
-                data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-        {% endfor %}
-    </div>
-</div>
-{% endif %}
+
 
 <div class="article_container mt-3 nanum_myeongjo">
     <h2 class="article_title"> {{ current_article.title }} </h2>
@@ -37,9 +15,7 @@
 
     <hr>
 
-    <h4 class="mb-4"> 🚀 {{ current_article.place_name }} </h4>
-
-    <p> {{ current_article.address }} </p>
+    <div class="imageContainer"><img class="article_img" src="{{ current_article.image.url }}" alt=""></div>
 
     <p> {{ current_article.content }} </p>
 

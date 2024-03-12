@@ -6,12 +6,12 @@
 
 {% block content %}
 
-    <div class="nanum_myeongjo creationForm_content creationForm">
+        <div class="nanum_myeongjo creationForm_content creationForm">
         <div class="mb-5">
-            <h3>게시글 작성</h3>
+            <h3>Create Project</h3>
         </div>
 
-        <form class="createForm" action="{% url 'articleapp:create' %}" method="post" enctype="multipart/form-data">
+        <form class="createForm" action="{% url 'projectapp:create' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
 <!--            부트스트랩 form 적용 가능하다!!!-->

@@ -6,8 +6,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, FormView
 
-from articleapp.forms import ArticleCreationForm, ArticleImageForm
-from articleapp.models import ArticleImage
+from articleapp.forms import ArticleCreationForm
+
 from placeapp.forms import PlaceCreationForm, PlaceSearchForm
 from placeapp.models import Place
 from sitecategoryapp.models import SiteCategory, ChildCategory

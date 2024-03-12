@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load bootstrap5 %}
+
+{% block content %}
+
+
+
+<div class="article_container mt-3 nanum_myeongjo">
+    <h2 class="article_title"> {{ current_project.title }} </h2>
+
+    <hr>
+
+    <div class="imageContainer"><img class="article_img" src="{{ current_project.image.url }}" alt=""></div>
+
+    <p> {{ current_project.description }} </p>
+
+    <p> {{ current_project.created_time }} </p>
+
+
+</div>
+
+    <a class="myarticleBtn mb-4 mt-4" href="{% url 'projectapp:list' %}">
+        <span>Project List</span>
+    </a>
+
+
+
+{% endblock %}

@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from articleapp.models import Article, ArticleImage
+from articleapp.models import Article
 
 from django.utils.translation import gettext_lazy
 
@@ -10,16 +10,17 @@ class ArticleCreationForm(ModelForm):
     class Meta:
         model = Article
 
-        fields = ["title", "content"]  # writer, place는 서버 단에서 작업
+        fields = ["title", "image", "content"]  # writer, place는 서버 단에서 작업
 
         labels = {
             "title": gettext_lazy("Title"),
-            "content": gettext_lazy("Comment / Memory about this place"),
+            "image": gettext_lazy("Image"),
+            "content": gettext_lazy("Content"),
         }
 
         widgets = {
             "title": forms.TextInput(attrs={"placeholder": "Enter the title of your article"}),
-            "content": forms.Textarea(attrs={"placeholder": "Write a comment or Share your memory about your place"})
+            "content": forms.Textarea(attrs={"placeholder": "Write something"})
         }
 
         error_messages = {
@@ -29,13 +30,13 @@ class ArticleCreationForm(ModelForm):
         }
 
 
-class ArticleImageForm(ModelForm):
-    class Meta:
-        model = ArticleImage
-
-        fields = ["image", ]  # post(article)는 서버 단에서 작업
-
-        labels = {
-            "image": gettext_lazy("Image")
-        }
+# class ArticleImageForm(ModelForm):
+#     class Meta:
+#         model = ArticleImage
+#
+#         fields = ["image", ]  # post(article)는 서버 단에서 작업
+#
+#         labels = {
+#             "image": gettext_lazy("Image")
+#         }
 

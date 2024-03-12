@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "commentapp",
     "sitecategoryapp",
     "curationapp",
+    "projectapp",
 ]
 
 MIDDLEWARE = [

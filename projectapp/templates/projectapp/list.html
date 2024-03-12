@@ -5,12 +5,12 @@
 {% block content %}
 
 
-{% if article_list %}
+{% if project_list %}
 <div class="container">
-    {% for article in article_list %}
+    {% for project in project_list %}
     <div class="card_div">
-        <a href="{% url 'articleapp:detail' pk=article.pk %}">
-            {% include 'snippets/card.html' with article=article %}
+        <a href="{% url 'projectapp:detail' pk=project.pk %}">
+                {% include 'snippets/card_project.html' with project=project %}
         </a>
     </div>
     {% endfor %}
@@ -21,7 +21,7 @@
 
 {% else %}
 <div class="container">
-    <h1>No articles yet.</h1>
+    <h1>No projects yet.</h1>
 </div>
 {% endif %}
 

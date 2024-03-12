@@ -1,12 +1,7 @@
 {% load static %}
 
 
-    {% if article.image.all|length > 0 %}
-    {% for cur in article.image.all %}
-    {% if forloop.first %}
-    <img class="article_list_img" src="{{ cur.image.url }}">
-    {% endif %}
-    {% endfor %}
-    {% else %}
-    <img class="article_list_img" src="{% static 'no_image.jpg' %}">
-    {% endif %}
+    <img class="card_div_img" src="{{ article.image.url }}">
+
+
+
