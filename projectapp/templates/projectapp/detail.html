@@ -20,6 +20,23 @@
 
 </div>
 
+    {% if user.is_authenticated %}
+        {% if not subscription %} {# 구독하지 않은 경우 #}
+            <div class="btn_container">
+                <a class="subscribeBtn mt-5" href="{% url 'subscriptionapp:subscribe' %}?project_pk={{ current_project.pk }}">
+                    Subscribe
+                </a>
+            </div>
+        {% else %}
+            <div class="btn_container">
+                <a class="cancelSubscribeBtn mt-5" href="{% url 'subscriptionapp:subscribe' %}?project_pk={{ current_project.pk }}">
+                    Cancel Subscription
+                </a>
+            </div>
+        {% endif %}
+
+    {% endif %}
+
     <div>
         {% include 'snippets/list_fragment.html' with article_list=object_list %}
     </div>

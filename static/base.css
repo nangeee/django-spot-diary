@@ -104,6 +104,36 @@ a:hover, button:hover {
     background: transparent;
 }
 
+.subscribeBtn {
+    display: block;
+    border: solid black 2px;
+    width: 60%;
+    max-width: 200px;
+    height: 3rem;
+    line-height: 200%;
+    text-align: center;
+    border-radius: 1rem;
+    /* margin-left: 180px; */
+    margin: auto;
+    padding: 5px;
+    background: pink;
+}
+
+.cancelSubscribeBtn {
+    display: block;
+    border: solid black 2px;
+    width: 60%;
+    max-width: 200px;
+    height: 3rem;
+    line-height: 200%;
+    text-align: center;
+    border-radius: 1rem;
+    /* margin-left: 180px; */
+    margin: auto;
+    padding: 5px;
+    background: skyblue;
+}
+
 .categoryBtn {
     display: block;
     border: solid black 2px;

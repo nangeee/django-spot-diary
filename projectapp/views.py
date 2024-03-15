@@ -8,6 +8,7 @@ from django.views.generic.list import MultipleObjectMixin
 from articleapp.models import Article
 from projectapp.forms import ProjectCreationForm
 from projectapp.models import Project
+from subscriptionapp.models import Subscription
 
 
 # Create your views here.
@@ -35,8 +36,17 @@ class ProjectDetailView(DetailView, MultipleObjectMixin):
     # 현 project에 속한 article만 가져오도록 필터링하는 메서드
     # 템플릿에서 필터링된 object들 사용 가능
     def get_context_data(self, **kwargs):
+        # 현재 user가 이 project를 구독하고 있는지 아닌지 판별해야 함
+        project = self.object
+        user = self.request.user
+
+        if user.is_authenticated:
+            subscription = Subscription.objects.filter(user=user, project=project)
+
         object_list = Article.objects.filter(project=self.get_object())
-        return super(ProjectDetailView, self).get_context_data(object_list=object_list, **kwargs)
+        return super(ProjectDetailView, self).get_context_data(object_list=object_list,
+                                                               subscription=subscription,
+                                                               **kwargs)
 
 
 
