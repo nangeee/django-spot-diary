@@ -4,6 +4,9 @@
 
 {% block content %}
 
+<script src="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/js/medium-editor.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
     <div class="nanum_myeongjo accountapp_content creationForm">
         <div class="mb-5">
             <h3>Modify Article</h3>
@@ -16,5 +19,7 @@
             <input class="btn btn-outline-dark rounded-pill col-4 mt-2" type="submit" >
         </form>
     </div>
+
+<script>var editor = new MediumEditor('.editable');</script>
 
 {% endblock %}

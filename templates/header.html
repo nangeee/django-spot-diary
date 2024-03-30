@@ -11,6 +11,9 @@
 {#        <a href="{% url 'sitecategoryapp:list' %}"><span>Places</span></a>#}
         <a href="{% url 'articleapp:list' %}"><span>Articles</span></a>
         <a href="{% url 'articleapp:create' %}"><span>Create Article</span></a>
+        <a href="{% url 'projectapp:list' %}"><span>Projects</span></a>
+        <a href="{% url 'projectapp:create' %}"><span>Create Project</span></a>
+        <a href="{% url 'subscriptionapp:list' %}"><span>Subscriptions</span></a>
         <a href="{% url 'accountapp:detail' pk=user.pk %}"><span>My Page</span></a>
         <a href="{% url 'accountapp:logout' %}"><span>Logout</span></a>
         {% endif %}

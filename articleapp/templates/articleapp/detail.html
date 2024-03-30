@@ -17,7 +17,7 @@
 
     <div class="imageContainer"><img class="article_img" src="{{ current_article.image.url }}" alt=""></div>
 
-    <p> {{ current_article.content }} </p>
+    <p> {{ current_article.content | safe }} </p>
 
     <p> {{ current_article.created_time }} </p>
 

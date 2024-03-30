@@ -5,8 +5,18 @@ from articleapp.models import Article
 
 from django.utils.translation import gettext_lazy
 
+from projectapp.models import Project
+
 
 class ArticleCreationForm(ModelForm):
+    # content field의 class와 style을 form에서 미리 지정하는 것
+    content = forms.CharField(widget=forms.Textarea(attrs={"class": "editable text-left",
+                                                           "style": "height: auto;"}))
+
+    # foreign key인 project field 선택
+    # required=False -> 필드 선택 안 해도 되도록
+    project = forms.ModelChoiceField(queryset=Project.objects.all(), required=False)
+
     class Meta:
         model = Article
 
