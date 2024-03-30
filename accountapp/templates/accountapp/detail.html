@@ -14,12 +14,19 @@
         {% if current_user.profile.image %}
         <img class="profileImg mb-3" src="{{ current_user.profile.image.url }}">
         {% endif %}
+        <div>
+            <h3>
+                {{ current_user.profile.nickname }}
+
+                <a class="material-icons mb-2" style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .3rem"
+                   href="{% url 'profileapp:update' pk=current_user.profile.pk %}">
+                    edit
+                </a>
+            </h3>
+        </div>
         {% if current_user.profile.intro_msg %}
         <p class="mb-4"> {{ current_user.profile.intro_msg }} </p>
         {% endif %}
-        <a class="mypageBtn mb-4" href="{% url 'profileapp:update' pk=current_user.profile.pk %}">
-                Modify Profile
-        </a>
         {% else %}
         <a class="mypageBtn mb-4" href="{% url 'profileapp:createProfile' %}">
                 Create Profile
@@ -27,11 +34,13 @@
         {% endif %}
 
         {% if current_user == user %}
-        <a class="mypageBtn mb-4" href="{% url 'accountapp:update' pk=current_user.pk %}">
-                Modify Account Info
+        <a class="material-icons mb-4" style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .3rem"
+           href="{% url 'accountapp:update' pk=current_user.pk %}">
+                settings
         </a>
-        <a class="mypageBtn mb-4" href="{% url 'accountapp:delete' pk=current_user.pk %}">
-                Delete Account
+        <a class="material-icons mb-4" style="box-shadow: 0 0 4px red; border-radius: 10rem; padding: .3rem; margin-left: 2rem;"
+           href="{% url 'accountapp:delete' pk=current_user.pk %}">
+                cancel
         </a>
         {% endif %}
     </div>

@@ -157,5 +157,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_REDIRECT_URL = reverse_lazy("accountapp:helloWorld")
+LOGIN_REDIRECT_URL = reverse_lazy("home")
 LOGOUT_REDIRECT_URL = reverse_lazy("accountapp:login")

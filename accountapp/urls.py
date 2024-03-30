@@ -1,6 +1,6 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
-from accountapp.views import helloWorld, AccountCreateView, AccountDetailView, AccountUpdateView, AccountDeleteView, \
+from accountapp.views import AccountCreateView, AccountDetailView, AccountUpdateView, AccountDeleteView, \
     CustomizedLoginView
 
 ### app_name - 도메인 네임 설정?
@@ -12,7 +12,6 @@ app_name = "accountapp"
 
 
 urlpatterns = [
-    path("helloWorld/", helloWorld, name="helloWorld"),
     path("createAccount/", AccountCreateView.as_view(), name="createAccount"),
     path("login/", CustomizedLoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),

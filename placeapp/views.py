@@ -51,7 +51,7 @@ def create_place(request):
                 cur = ChildCategory.objects.get(name=category)
                 print("***", cur.place_set.all())
 
-            return HttpResponseRedirect(reverse("accountapp:helloWorld"))
+            return HttpResponseRedirect(reverse("home"))
 
         else:
             return HttpResponseBadRequest("<h1 style='text-align:center;'>Place creation failed. Please try again.</h1>")

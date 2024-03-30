@@ -24,31 +24,6 @@ ownership_authenticated = [
 ]
 
 
-# Function Based View
-@login_required  # django.contrib.auth.decorators.login_required
-def helloWorld(request):
-
-    if request.method == "POST":
-
-        user = myUser() # models.py의 User 클래스 객체 생성
-        user.userName = request.POST.get("userName") # post 방식으로 받은 데이터 중에서, userName 이라는 이름의 데이터 가져오기
-        user.userID = request.POST.get("userID")
-        user.password = request.POST.get("password")
-        user.save() # 만든 객체 저장 -> 실제 DB에 저장됨
-
-        # users = User.objects.all()
-
-        # return render(request, template_name="accountapp/helloWorld.html",
-        #               context={"userInfo": user, "usersInfo": users})
-        return HttpResponseRedirect(reverse("accountapp:helloWorld"))
-    else:
-        users = myUser.objects.all()
-        return render(request, template_name="accountapp/helloWorld.html",
-                      context={"usersInfo": users})
-
-    # return render(request, template_name="accountapp/helloWorld.html")
-    # return HttpResponse("Hello, World!") # Alt + Enter로 라이브러리 import 가능
-
 
 # Class Based View로 Account Creation View 생성
 class AccountCreateView(CreateView):  # django.views.generic.CreateView
@@ -60,7 +35,7 @@ class AccountCreateView(CreateView):  # django.views.generic.CreateView
     form_class = UserCreationForm2  # accountapp.forms.UserCreationForm2
 
     # account creation 성공했을 때 -> 어느 경로로 재연결할지 지정
-    success_url = reverse_lazy("accountapp:helloWorld")  # Function Based View에서는 reverse 함수 사용
+    success_url = reverse_lazy("home")  # Function Based View에서는 reverse 함수 사용
     # Function과 Class 내부 방식의 차이 때문에 Class Based View에서는 reverse가 아닌 reverse_lazy 사용해야 함
 
     # account creation 과정에서 볼 html view 지정
@@ -91,7 +66,7 @@ class AccountUpdateView(UpdateView):
     model = User
     context_object_name = "current_user"
     form_class = AccountUpdateForm
-    success_url = reverse_lazy("accountapp:helloWorld")
+    success_url = reverse_lazy("home")
     template_name = "accountapp/update.html"
 
 
@@ -101,7 +76,7 @@ class AccountUpdateView(UpdateView):
 class AccountDeleteView(DeleteView):
     model = User
     context_object_name = "current_user"
-    success_url = reverse_lazy("accountapp:helloWorld")
+    success_url = reverse_lazy("home")
     template_name = "accountapp/delete.html"
 
 
